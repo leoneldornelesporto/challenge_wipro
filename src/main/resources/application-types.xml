@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="csv_to_json" format="json">
+      <types:shape format="weave" example="examples/json_entrada.json"><![CDATA[%dw 2.0
+
+type csv_to_json = Array<{|  COMPANY: String,   ID: String,   NAME: String,   ADDRESS: String,   NUMBER: String|}> {"example": "[{\\\"COMPANY\\\":\\\"wipro\\\",\\\"ID\\\":\\\"3344\\\",\\\"NAME\\\":\\\"Sample Name\\\",\\\"ADDRESS\\\":\\\"ADDRESS + NUMBER\\\",\\\"NUMBER\\\":\\\"1500\\\"},{\\\"COMPANY\\\":\\\"appirio\\\",\\\"ID\\\":\\\"3345\\\",\\\"NAME\\\":\\\"Sample Name 2\\\",\\\"ADDRESS\\\":\\\"ADDRESS + NUMBER\\\",\\\"NUMBER\\\":\\\"1024\\\"},{\\\"COMPANY\\\":\\\"appirio\\\",\\\"ID\\\":\\\"3346\\\",\\\"NAME\\\":\\\"Sample Name 3\\\",\\\"ADDRESS\\\":\\\"ADDRESS + NUMBER\\\",\\\"NUMBER\\\":\\\"322\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="csv" format="csv">
+      <types:shape format="weave" example="MyFiles/csv.csv"><![CDATA[%dw 2.0
+
+type csv = Array<{|  "﻿COMPANY": String,   ID: String,   NAME: String,   ADDRESS: String,   NUMBER: String|}> {"isQuotedString": "false",
+"header": "true",
+"headerLineNumber": "0",
+"separator": ","}
+
+]]></types:shape>
+      <types:properties>
+        <types:property name="headerLineNumber" value="0"/>
+        <types:property name="header" value="true"/>
+        <types:property name="isQuotedString" value="false"/>
+        <types:property name="separator" value=","/>
+      </types:properties>
+    </types:type>
+    <types:type name="json_output" format="json">
+      <types:shape format="weave" example="examples/test.json"><![CDATA[%dw 2.0
+
+type json_output = {|
+  wipro: Array<{|    ID: String,     name: String,     address: String  |}>, 
+  appirio: Array<{|    ID: String,     name: String,     address: String  |}>
+|} {"example": "{\\\"wipro\\\":[{\\\"ID\\\":\\\"3344\\\",\\\"name\\\":\\\"Sample Name\\\",\\\"address\\\":\\\"AddressLine1 + AddressLine2\\\"}],\\\"appirio\\\":[{\\\"ID\\\":\\\"3345\\\",\\\"name\\\":\\\"Sample Name 2\\\",\\\"address\\\":\\\"AddressLine1 + AddressLine2\\\"},{\\\"ID\\\":\\\"3346\\\",\\\"name\\\":\\\"Sample Name 3\\\",\\\"address\\\":\\\"AddressLine1 + AddressLine2\\\"}]}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#0b14bf10-26ee-402a-96f8-0702a1e02cc9">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="csv"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="json_output"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

@@ -1,0 +1,23 @@
+[
+  {
+    "COMPANY": "wipro",
+    "ID": "3344",
+    "NAME": "Sample Name",
+    "ADDRESS": "ADDRESS + NUMBER",
+    "NUMBER": "1500"
+  },
+  {
+    "COMPANY": "appirio",
+    "ID": "3345",
+    "NAME": "Sample Name 2",
+    "ADDRESS": "ADDRESS + NUMBER",
+    "NUMBER": "1024"
+  },
+  {
+    "COMPANY": "appirio",
+    "ID": "3346",
+    "NAME": "Sample Name 3",
+    "ADDRESS": "ADDRESS + NUMBER",
+    "NUMBER": "322"
+  }
+]

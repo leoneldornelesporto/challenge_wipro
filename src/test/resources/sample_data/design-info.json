@@ -1,0 +1,10 @@
+{
+  "sampleData": {
+    "0810083f-2af2-41e0-8a3c-da6876c031cd": {
+      "payload": "sample_data/defaultbinarytype.dwl"
+    },
+    "79405245-f204-46dc-a52d-aeb2dcb2ef41": {
+      "payload": "sample_data/defaultbinarytype_1.dwl"
+    }
+  }
+}

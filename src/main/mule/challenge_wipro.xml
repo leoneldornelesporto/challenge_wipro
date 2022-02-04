@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<file:config name="File_Config" doc:name="File Config" doc:id="61489be5-7994-4348-b265-b93e87a5b7f1" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d0347b9e-3743-4f6a-87b3-fd8fccca7141" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="challenge_wiproFlow" doc:id="2601ac85-28ce-4bf5-895a-70154a6a5a7a" >
+		<scheduler doc:name="Scheduler" doc:id="888fe9b2-fb18-42ea-a648-6b387b47b685" >
+			<scheduling-strategy >
+				<fixed-frequency />
+			</scheduling-strategy>
+		</scheduler>
+		<file:read doc:name="Read" doc:id="0d8cf5bd-321b-4128-b9b5-e039132a3bcc" config-ref="File_Config" path="C:\Users\leonel.porto\Documents\Workspace-alpargatas\challenge_wipro\src\main\resources\MyFiles\csv.csv"/>
+		<ee:transform doc:name="Convert CSV to JSON" doc:id="0b14bf10-26ee-402a-96f8-0702a1e02cc9" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[output application/json
+---
+payload map ((item, index) -> {
+	COMPANY:item.COMPANY,
+	NAME: item.NAME,
+	ADDRESS: item.ADDRESS ++ item.NUMBER
+})]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ee:transform doc:name="Group by COMPANY" doc:id="53785e54-e143-4e93-8e61-c27e7bb8e152" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload groupBy (item) -> item.COMPANY ]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="44dc8dc3-e783-44b6-aaf3-9229a21c1c08" message="#[payload]"/>
+	</flow>
+</mule>

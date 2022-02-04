@@ -1,0 +1,21 @@
+{
+    "wipro": [
+        {
+            "ID": "3344",
+            "name": "Sample Name",
+            "address": "AddressLine1 + AddressLine2"
+        }
+    ],
+    "appirio": [
+        {
+            "ID": "3345",
+            "name": "Sample Name 2",
+            "address": "AddressLine1 + AddressLine2"    
+        },
+        {
+            "ID": "3346",
+            "name": "Sample Name 3",
+            "address": "AddressLine1 + AddressLine2"    
+        }
+    ]
+}
