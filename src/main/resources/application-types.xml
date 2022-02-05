@@ -9,9 +9,9 @@ type csv_to_json = Array<{|  COMPANY: String,   ID: String,   NAME: String,   AD
 ]]></types:shape>
     </types:type>
     <types:type name="csv" format="csv">
-      <types:shape format="weave" example="MyFiles/csv.csv"><![CDATA[%dw 2.0
+      <types:shape format="weave" example="MyFiles/DadosEmCsv.csv"><![CDATA[%dw 2.0
 
-type csv = Array<{|  "﻿COMPANY": String,   ID: String,   NAME: String,   ADDRESS: String,   NUMBER: String|}> {"isQuotedString": "false",
+type csv = Array<{|  "﻿COMPANY": String,   ID: String,   NAME: String,   ADDRESS1: String,   ADDRESS2: String|}> {"isQuotedString": "false",
 "header": "true",
 "headerLineNumber": "0",
 "separator": ","}
@@ -35,18 +35,13 @@ type json_output = {|
 ]]></types:shape>
     </types:type>
   </types:catalog>
-  <types:enrichment select="#0b14bf10-26ee-402a-96f8-0702a1e02cc9">
+  <types:enrichment select="#c1f3422a-aa7f-4a07-b43c-e4db64650ebb">
     <types:processor-declaration>
       <types:input-event>
         <types:message>
           <types:payload type="csv"/>
         </types:message>
       </types:input-event>
-      <types:output-event>
-        <types:message>
-          <types:payload type="json_output"/>
-        </types:message>
-      </types:output-event>
     </types:processor-declaration>
   </types:enrichment>
 </types:mule>

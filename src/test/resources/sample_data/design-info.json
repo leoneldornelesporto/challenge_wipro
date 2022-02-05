@@ -3,6 +3,12 @@
     "0810083f-2af2-41e0-8a3c-da6876c031cd": {
       "payload": "sample_data/defaultbinarytype.dwl"
     },
+    "0b14bf10-26ee-402a-96f8-0702a1e02cc9": {
+      "payload": "sample_data/list_csv.csv"
+    },
+    "5659cff8-0150-4c8f-8a24-9550fee3a81f": {
+      "payload": "sample_data/list_csv_1.csv"
+    },
     "79405245-f204-46dc-a52d-aeb2dcb2ef41": {
       "payload": "sample_data/defaultbinarytype_1.dwl"
     }
