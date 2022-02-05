@@ -16,25 +16,26 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 				<fixed-frequency />
 			</scheduling-strategy>
 		</scheduler>
-		<file:read doc:name="Read" doc:id="0d8cf5bd-321b-4128-b9b5-e039132a3bcc" config-ref="File_Config" path="C:\Users\leonel.porto\Documents\Workspace-alpargatas\challenge_wipro\src\main\resources\MyFiles\DadosEmCsv.csv"/>
-		<ee:transform doc:name="CSV to JSON" doc:id="c1f3422a-aa7f-4a07-b43c-e4db64650ebb" >
+		<file:read doc:name="Read" doc:id="6a0cb75b-800a-4c04-88ad-6e28ec2c5e05" config-ref="File_Config" path="C:\Users\leonel.porto\Documents\Workspace-alpargatas\challenge_wipro\src\main\resources\MyFiles\DadosEmCsv.csv" outputMimeType='application/csv; separator=";"'/>
+		<ee:transform doc:name="CSV to JSON" doc:id="0b656b44-8d7d-4b18-b202-469a2b270958" >
 			<ee:message >
-				<ee:set-payload ><![CDATA[output application/json
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
 ---
-{ 
-	"wipro": (payload filter $.COMPANY == 'wipro') map (item, index) -> 
-	{ 
-		ID:item.ID,
-		NAME: item.NAME,
-		ADDRESS: item.ADDRESS1 ++ ' ' ++ item.ADDRESS2,
-	}, 
-	"appirio": (payload filter $.COMPANY == 'appirio') map (item, index) -> 
+{
+	"wipro": (payload filter $.company == 'Wipro') map (item, index) -> 
 	{
-		ID:item.ID,
-		NAME: item.NAME,
-		ADDRESS: item.ADDRESS1 ++ ' ' ++ item.ADDRESS2,
-	} 
-} ]]></ee:set-payload>
+		ID: item.employeeID,
+		NAME: item.employeeName,
+		ADDRESS: item.addressLine1 ++ ' ' ++ item.addressLine2,
+	},
+	"appirio": (payload filter $.company == 'Appirio') map (item, index) -> 
+	{
+		ID: item.employeeID,
+		NAME: item.employeeName,
+		ADDRESS: item.addressLine1 ++ ' ' ++ item.addressLine2,
+	}
+}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="44dc8dc3-e783-44b6-aaf3-9229a21c1c08" message="#[payload]"/>

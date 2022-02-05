@@ -1,5 +1,8 @@
 {
   "sampleData": {
+    "0b656b44-8d7d-4b18-b202-469a2b270958": {
+      "payload": "sample_data/defaultbinarytype.csv"
+    },
     "0810083f-2af2-41e0-8a3c-da6876c031cd": {
       "payload": "sample_data/defaultbinarytype.dwl"
     },
@@ -11,6 +14,9 @@
     },
     "79405245-f204-46dc-a52d-aeb2dcb2ef41": {
       "payload": "sample_data/defaultbinarytype_1.dwl"
+    },
+    "c1f3422a-aa7f-4a07-b43c-e4db64650ebb": {
+      "payload": "sample_data/list_csv_2.csv"
     }
   }
 }

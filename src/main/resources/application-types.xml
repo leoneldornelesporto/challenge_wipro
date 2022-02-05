@@ -11,7 +11,7 @@ type csv_to_json = Array<{|  COMPANY: String,   ID: String,   NAME: String,   AD
     <types:type name="csv" format="csv">
       <types:shape format="weave" example="MyFiles/DadosEmCsv.csv"><![CDATA[%dw 2.0
 
-type csv = Array<{|  "﻿COMPANY": String,   ID: String,   NAME: String,   ADDRESS1: String,   ADDRESS2: String|}> {"isQuotedString": "false",
+type csv = Array<{|  employeeID: String,   employeeName: String,   company: String,   addressLine1: String,   addressLine2: String|}> {"isQuotedString": "false",
 "header": "true",
 "headerLineNumber": "0",
 "separator": ","}
@@ -35,7 +35,7 @@ type json_output = {|
 ]]></types:shape>
     </types:type>
   </types:catalog>
-  <types:enrichment select="#c1f3422a-aa7f-4a07-b43c-e4db64650ebb">
+  <types:enrichment select="#0b656b44-8d7d-4b18-b202-469a2b270958">
     <types:processor-declaration>
       <types:input-event>
         <types:message>
